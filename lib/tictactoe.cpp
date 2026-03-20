@@ -59,48 +59,49 @@ int8_t TicTacToeGame::TicTacToeGame::check() {
 	return -1;
 }
 
-char* TicTacToeGame::TicTacToeGame::get_board_print(char opening, char x_mark, char o_mark, char blank, char closing, char line_end) {
+std::string TicTacToeGame::TicTacToeGame::get_board_print(char opening, char x_mark, char o_mark, char blank, char closing, char line_end) {
+	std::string board;
+	board.resize(30);
 	this->_player_O_status_and_general = this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK;
 	while((this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) < 30) {
-		this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK)] = opening;
+		board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK)] = opening;
 		switch (this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) {
 			case 0:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 8 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 8 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 8 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 8 ? o_mark : blank;
 				break;
 			case 3:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 7 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 7 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 7 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 7 ? o_mark : blank;
 				break;
 			case 6:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 6 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 6 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 6 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 6 ? o_mark : blank;
 				break;
 			case 10:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 5 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 5 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 5 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 5 ? o_mark : blank;
 				break;
 			case 13:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 4 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 4 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 4 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 4 ? o_mark : blank;
 				break;
 			case 16:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 3 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 3 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 3 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 3 ? o_mark : blank;
 				break;
 			case 20:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 2 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 2 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 2 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 2 ? o_mark : blank;
 				break;
 			case 23:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 1 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 1 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 1 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 << 1 ? o_mark : blank;
 				break;
 			case 26:
-				this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 ? o_mark : blank;
+				board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1] = (this->_player_X_status_and_vmatch & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 ? x_mark : (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) >> this->_OTHER_FIELD_SIZE & 1 ? o_mark : blank;
 				break;
 		}
-		this->_board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 2] = closing;
+		board[(this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 2] = closing;
 		this->_player_O_status_and_general = (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) | (this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 3;
 		if ((this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) % 10 == 9) {
-			this->_board[this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK] = line_end;
+			board[this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK] = line_end;
 			this->_player_O_status_and_general = (this->_player_O_status_and_general & this->_BOARD_FFIELD_BIT_MASK) | (this->_player_O_status_and_general & this->_OTHER_FIELD_BIT_MASK) + 1;
 		}
 	}
-	this->_board[30] = '\0';
-	return this->_board;
+	return board;
 }
 
 int8_t TicTacToeGame::TicTacToeGame::_negamax(u_int8_t depth, int8_t alpha, int8_t beta, int8_t player) {
